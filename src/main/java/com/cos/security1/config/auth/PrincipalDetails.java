@@ -66,6 +66,7 @@ public class PrincipalDetails implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
+		// 사이트에서 1년동안 회원이 로그인을 하지 않으면 휴면 계정으로 하기로 할 수 있다.
 		return true;
 	}
 }

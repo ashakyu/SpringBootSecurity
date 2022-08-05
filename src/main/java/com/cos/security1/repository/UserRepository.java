@@ -7,5 +7,8 @@ import com.cos.security1.model.User;
 //CRUD 함수를 JpaRepository가 들고 있음.
 //@Repository라는 어노테이션이 없어도 Ioc가 가능하다 이유: JpaRepository를 상속 했기 때문에 가능하다. 
 public interface UserRepository extends JpaRepository<User, Integer>{
+	//findBy규칙 -> Username문법 
+	//select  * from user where username = ?
+	public User findByUsername(String username); //JPA Query methods 
 	
 }
