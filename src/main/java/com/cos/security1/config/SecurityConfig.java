@@ -33,7 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.loginPage("/loginForm")
 		//.if form에서 username 의 name을 변경하고 싶으면 .usernameParameter("name이름");
 			.loginProcessingUrl("/login") //login 주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인을 진행해준다.
-			.defaultSuccessUrl("/");
+			.defaultSuccessUrl("/")
+			.and()
+			.oauth2Login()
+			.loginPage("/loginForm");
 		
 	}
 }
