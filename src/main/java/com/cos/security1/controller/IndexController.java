@@ -76,7 +76,8 @@ public class IndexController {
 		return "index"; 
 	}
 	@GetMapping("/user") //OAuth2User 와 PrincipalDetails 둘 중 뭘 적어야하나 .. -> 
-	public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails userDetails) {
+	public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+		System.out.println("principalDetails : " + principalDetails.getUser());
 		return "user";
 	}
 	

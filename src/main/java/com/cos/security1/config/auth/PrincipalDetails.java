@@ -25,10 +25,21 @@ import lombok.Data;
 @Data									//일반 로그인/ OAuth 로그인을 둘다 처리하기 위해 PrincipalDetails 타입에서 둘을 묶어서 처리한다.
 public class PrincipalDetails implements UserDetails, OAuth2User{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private User user; //콤포지션 설정
+	private Map<String, Object> attributes; 
 
+	//일반 로그인 생성자
 	public PrincipalDetails(User user) {
 		this.user = user;
+	}
+	
+	//OAuth 로그인 생성자
+	public PrincipalDetails(User user, Map<String, Object> attributes) {
+		this.attributes = attributes;
 	}
 	
 	//해당 User 의 권한을 리턴하는 곳 !! 
@@ -50,10 +61,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
 		return user.getPassword();
 	}
 
-	@Override
-	public String getUsername() {
-		return user.getUsername();
-	}
+
 
 	@Override
 	public boolean isAccountNonExpired() {
@@ -76,13 +84,20 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
 		return true;
 	}
 
+	//getAttributes() 에서 계정 정보 저장 -> 통째로 넣는다. 
 	@Override
 	public Map<String, Object> getAttributes() {
-		return null;
+		return attributes;
 	}
 
 	@Override
 	public String getName() {
-		return null;
+		return (String) attributes.get("sub");
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return user.getUsername();
 	}
 }
