@@ -22,9 +22,9 @@ public class PrincipalDetailsService implements UserDetailsService{
 	//시큐리티 session = Authentication = UserDetails Type 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User userEntity = userRepository.findByUsername(username);
-		if(userEntity != null) {
-			return new PrincipalDetails(userEntity);
+		User user = userRepository.findByUsername(username);
+		if(user != null) {
+			return new PrincipalDetails(user);
 		}
 		return null;
 	}
